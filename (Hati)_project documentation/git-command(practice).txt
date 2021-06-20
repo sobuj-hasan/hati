@@ -1,0 +1,43 @@
+====================
+
+Git Command
+
+=====================
+
+git add . => git ke file chiniye dewa
+
+===========
+
+git commit -m "message" => Update code toko akta comment kore rakha
+
+================
+
+git push => github website a amer project or new change gulo pathano
+
+=================
+
+git status => git er obostha jana 
+
+====================
+
+git pull => git push er olta (github website theke kono change amer website a nie asha)
+
+=====================
+
+git branch new_branch =>  New bracnch name akta branch create hobe
+
+=======================
+
+git checkout main => main branch a nie jabe
+
+========================
+
+git reset --hard => last commit er por joto kaj korse oigula delete hoye jabe
+
+=========================
+
+
+===================
+
+Author Saiful Islam Vai
+
