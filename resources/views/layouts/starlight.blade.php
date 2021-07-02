@@ -4,15 +4,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Tohoney Admin Dashboard</title>
-
     <!-- vendor css -->
     <link href="{{ asset('starlight_assets/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('starlight_assets/lib/Ionicons/css/ionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('starlight_assets/lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('starlight_assets/lib/rickshaw/rickshaw.min.css') }}" rel="stylesheet">
-
+    <!-- Laravel Notify message! -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" />
     <!-- Starlight CSS -->
     <link href="{{ asset('starlight_assets/css/starlight.css') }}" rel="stylesheet">
   </head>
@@ -36,8 +35,44 @@
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">My Orders</span>
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">Manage Profile</span>
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">My Wishlist</span>
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">Mini~shop Vauchar</span>
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">My review</span>
+          </div>
+        </a>
+        <a href="" class="sl-menu-link @yield('')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">Return & Cancellations</span>
+          </div>
+        </a>
 
         {{-- Admin Checking / dashboard  --}}
         @if (Auth::user()->role == 1)
@@ -129,7 +164,6 @@
                         <i class="icon ion-power"></i>
                         Sign Out
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
@@ -145,14 +179,9 @@
 
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
-
         @yield('breadcrumb')
-        
         <div class="sl-pagebody">
-
           @yield('content')
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         @yield('footer_scripts')
@@ -167,6 +196,9 @@
     <script src="{{ asset('starlight_assets/lib/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('starlight_assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
     <script src="{{ asset('starlight_assets/js/starlight.js') }}"></script>
+    <!-- Toastr script CDN -->
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Notify::message() !!}
 
   </body>
 </html>

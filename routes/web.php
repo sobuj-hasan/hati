@@ -37,6 +37,7 @@
 
     // generet laravel HomeController Routes
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('download/invoice/{order_id}', [HomeController::class, 'downloadinvoice'])->name('downloadinvoice');
 
 
     // generet laravel CatrgoryController Routes

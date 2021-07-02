@@ -1,4 +1,4 @@
-@extends('layouts.tohoney');
+@extends('layouts.tohoney')
 
 @section('body')
 <!-- .breadcumb-area start -->

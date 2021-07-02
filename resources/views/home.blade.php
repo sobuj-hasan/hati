@@ -60,14 +60,7 @@
                     </div>
                 </div>
             @else
-                <div class="card">
-                    <div class="card-header">
-                        Customer Dashboard
-                    </div>
-                    <div class="card-body">
-                        sadf klasdflak sdflsaf
-                    </div>
-                </div>
+                @include('customer.dashboard')
             @endif
         </div>
     </div>

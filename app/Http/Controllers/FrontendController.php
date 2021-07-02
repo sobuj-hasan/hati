@@ -1,8 +1,7 @@
 <?php
     namespace App\Http\Controllers;
-
     use Illuminate\Http\Request;
-    use App\Models\Category, App\Models\Product, App\Models\Order;
+    use App\Models\Category, App\Models\Product, App\Models\Order, App\Models\Order_details;
     use App\Models\Cart;
     use App\Models\Coupon;
     use App\Models\Setting;
@@ -12,6 +11,7 @@
     use App\Models\City;
     use Carbon\Carbon;
     use Auth;
+    use Notify;
     use Hash;
 
     class FrontendController extends Controller {
@@ -21,21 +21,17 @@
             $products_all = Product::latest()->limit(8)->get();
             return view('index', compact('categories', 'products_all'));
         }
-        
         function about(){
             $names = ["saiful", "Islam", "Akash", "Shamim", 234, "Islam Mahmud"];
             return view('about', compact('names'));
         }
-
         function contact(){
             $settings = Setting::all();
             return view('contact', compact('settings'));
         }
-
         function service(){
             return view('contact');
         }
-
         function productdetails($product_id){
             $product_category_id = Product::findOrFail($product_id)->category_id;
             $related_products = Product::where('category_id', $product_category_id)->where('id', '!=', $product_id)->get();
@@ -55,7 +51,6 @@
             $category_name = Category::find($category_id);
             return view('categorywiseshop', compact('products', 'category_name'));
         }
-
         function cart($coupon_name = ""){
             $coupon_discount = 0;
             if($coupon_name == ""){
@@ -91,10 +86,12 @@
                         'quantity' => $quantity
                     ]);
                 }else{
-                    return back()->with('stock_available_status', 'Quantity not available!');
+                    Notify::error('Quantity not available', 'error');
+                    return back();
                 }
             }
-            return back()->with('cart_update_status', 'Your cart Updated');
+            Notify::success('Your cart Updated', 'Success');
+            return back();
         }
         function checkout(){
             return view('checkout', [
@@ -120,7 +117,6 @@
         }
         function customerloginpost(Request $request){
             // return $request->email;
-
             if(User::where('email', $request->email)->exists()){
                 $db_password = User::where('email', $request->email)->first()->password;
                 if(Hash::check($request->password, $db_password)){
@@ -145,17 +141,31 @@
             }
             echo $string_send;
         }
-
         function checkoutpost(Request $request){
             if($request->payment_option == 1){
                 echo "Online Payment";
             }else{
-                Order::insert($request->except('_token') + [
+                $order_id = Order::insertGetId($request->except('_token') + [
+                    'user_id' => auth::id(),
+                    'discount' => session('session_coupon_discount'),
+                    'subtotal' => session('session_subtotal'),
+                    'total' => session('session_total_amount'),
                     'payment_status' => 1,
                     'created_at' => Carbon::now(),
                 ]);
-                echo "Done";
+                $carts = Cart::where('ip_address', request()->ip())->select('id', 'product_id', 'quantity')->get();
+                foreach ($carts as $cart) {
+                    Order_details::insert([
+                    'order_id' => $order_id,
+                    'product_id' => $cart->product_id,
+                    'quantity' => $cart->quantity,
+                    'created_at' => Carbon::now(),
+                    ]);
+                    Product::find($cart->product_id)->decrement('product_quantity', $cart->quantity);
+                    Cart::find($cart->id)->delete();
+                }
+                Notify::success('Your Order in successfully Placed', 'Success');
+                return redirect('home');
             }
         }
-
-}
+    }

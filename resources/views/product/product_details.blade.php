@@ -1,6 +1,4 @@
 @extends('layouts/tohoney')
-
-
 @section('body')
     <!-- .breadcumb-area start -->
     <div class="breadcumb-area bg-img-4 ptb-100">
@@ -262,7 +260,7 @@
             </div>
             <div class="row">
                 @forelse ($related_products as $related_product)
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-2 col-sm-4 col-12">
                         <div class="featured-product-wrap">
                             <div class="featured-product-img">
                                 <img src="{{ asset('image_uploads/product_image') }}/{{ $related_product->product_image }}" alt="">

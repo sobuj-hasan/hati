@@ -29,6 +29,9 @@
     <script src="{{ asset('tohoney_assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
     <!-- Select 2 cdn link -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Laravel Notify message! -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" />
+    
 
 </head>
 
@@ -80,7 +83,7 @@
                                     <a href=""><i class="fa fa-user"></i> {{ Auth::user()->name }} <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
                                         <li><a href="{{ url('home') }}">My Account</a></li>
-                                        <li><a href="{{ url('checkout') }}">Checkout</a></li>
+                                        <li><a href="{{ url('cart') }}">Show Cart</a></li>
                                         <li><a href="{{ url('wishlist') }}">wishlist</a></li>
                                         <li>
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -197,7 +200,7 @@
                                                 <img width="80" height="120" src="{{ asset('image_uploads/product_image') }}/{{ App\Models\Product::find($cart->product_id)->product_image }}" alt="product image">
                                             </div>
                                             <div class="cart-content">
-                                                <a href="cart.html">{{ App\Models\Product::find($cart->product_id)->product_name }}</a>
+                                                <a href="{{ url('product/details') }}/{{ $cart->product_id }}">{{ App\Models\Product::find($cart->product_id)->product_name }}</a>
                                                 <span>QTY : {{ $cart->quantity }}</span>
                                                 <p>৳ {{ App\Models\Product::find($cart->product_id)->product_price * $cart->quantity }}</p>
                                                 @php
@@ -418,6 +421,8 @@
         </div>
     </div>
     <!-- Modal area start -->
+
+    
     <!-- jquery latest version -->
     <script src="{{ asset('tohoney_assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap js -->
@@ -446,7 +451,9 @@
     <script src="{{ asset('tohoney_assets/js/scripts.js') }}"></script>
     <!-- Select 2 cdn file -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    <!-- Toastr script CDN -->
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Notify::message() !!}
 
     @yield('footer_scripts')
 

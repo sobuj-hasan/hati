@@ -1,8 +1,8 @@
-<li class="col-xl-3 col-lg-4 col-sm-6 col-12">
+<li class="col-xl-2 col-lg-3 col-sm-4 col-12">
     <div class="product-wrap">
         <div class="product-img">
             <span>Sale</span>
-            <img style="height:292px"; src="{{ asset('image_uploads/product_image') }}/{{ $product->product_image }}" alt="product-img">
+            <img style="height:210px"; src="{{ asset('image_uploads/product_image') }}/{{ $product->product_image }}" alt="product-img">
             <div class="product-icon flex-style">
                 <ul>
                     <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
