@@ -36,10 +36,16 @@
             @foreach ($orders as $order)
                 <tr>
                     <th scope="row">{{ $loop->index + 1 }}</th>
-                    <td><img src="images" alt="product image"></td>
                     <td>{{ $order->customer_name }}</td>
-                    <td><span>Qty: </span>{{ $order->customer_phone }}</td>
-                    <td><span class="badge badge-success p-2"></span></td>
+                    <td><span></span>{{ $order->customer_phone }}</td>
+                    <td><span></span>{{ $order->customer_email }}</td>
+                    <td>
+                        <span class="badge @php echo ($order->payment_status == 1 ? "badge-danger" : "badge-info"); @endphp p-2">
+                        @php
+                            echo ($order->payment_status == 1 ? "Pending" : "Shipped");
+                        @endphp
+                        </span>
+                    </td>
                     <td>12-02-2021</td>
                     <td><a target="_blank" href="{{ url('download/invoice') }}/{{ $order->id }}"><i class="fa fa-download"></i> Invoice</a></td>
                 </tr>

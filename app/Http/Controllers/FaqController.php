@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Faq;
 use Carbon\Carbon;
 
-
-
 class FaqController extends Controller
 {
     public function __construct()

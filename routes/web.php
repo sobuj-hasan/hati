@@ -10,7 +10,7 @@
     use App\Http\Controllers\SettingController;
     use App\Http\Controllers\CartController;
     use App\Http\Controllers\CouponController;
-
+    use App\Http\Controllers\SslCommerzPaymentController;
 
     // generet laravel basic auth Routes
     Auth::routes();
@@ -34,11 +34,10 @@
     Route::post('customer/login/post', [FrontendController::class, 'customerloginpost'])->name('customerloginpost');
     Route::post('get/city/list', [FrontendController::class, 'getcitylist']);
 
-
     // generet laravel HomeController Routes
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('home/userlist', [HomeController::class, 'userlist'])->name('userlist');
     Route::get('download/invoice/{order_id}', [HomeController::class, 'downloadinvoice'])->name('downloadinvoice');
-
 
     // generet laravel CatrgoryController Routes
     Route::get('category', [CategoryController::class, 'category'])->name('category');
@@ -52,11 +51,9 @@
     Route::get('category/all/restore', [CategoryController::class, 'categoryallrestore'])->name('categoryallrestore');
     Route::post('category/check/delete', [CategoryController::class, 'categorycheckdelete'])->name('categorycheckdelete');
 
-
     // generet laravel SubcatrgoryController Routes
     Route::get('subcategory', [SubcategoryController::class, 'subcategory'])->name('subcategory');
     Route::post('subcategory/post', [SubcategoryController::class, 'subcategorypost'])->name('subcategorypost');
-    
     
     // laravel ProductController Routes generet
     Route::get('product', [ProductController::class, 'product'])->name('product');
@@ -72,18 +69,14 @@
     Route::get('product/force/all/delete/', [ProductController::class, 'productforcealldelete'])->name('productforcealldelete');
     Route::get('product/all/restore', [ProductController::class, 'productallrestor'])->name('productallrestor');
 
-
     // Laravel FaqController Routes generate
     Route::get('faq', [FaqController::class, 'faq'])->name('faq');
     Route::post('faq/post', [FaqController::class, 'faqpost'])->name('faqpost');
     Route::get('faq/delete/{faq_id}', [FaqController::class, 'faqdelete'])->name('faqdelete');
     
-    
     // Laravel SettingController Routes generate
     Route::get('setting', [SettingController::class, 'setting'])->name('setting');
     Route::post('setting/post', [SettingController::class, 'settingpost'])->name('settingpost');
-
-
 
     // Laravel ContactController Routes generate
     Route::post('guest', [ContactController::class, 'guest'])->name('guest');
@@ -98,6 +91,20 @@
     // Laravel Resourcefull CouponController Routes generate
     // Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
     Route::resource('coupon', CouponController::class);
+
+    // SSLCOMMERZ Start
+    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+    Route::get('/online/payment', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+    //SSLCOMMERZ END
 
 
 

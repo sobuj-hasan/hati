@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tohoney - Home Page</title>
+    <title>MINI-shop - Home</title>
 
     <!-- all css here -->
     <!-- bootstrap v4.0.0-beta.2 css -->
@@ -31,10 +31,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Laravel Notify message! -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" />
-    
-
 </head>
-
 <body>
     <!--Start Preloader-->
     <div class="preloader-wrap">
@@ -275,11 +272,8 @@
         </div>
     </header>
     <!-- header-area end -->
-
-
+    
     @yield('body')
-
-
 <!-- start social-newsletter-section -->
     <section class="social-newsletter-section">
         <div class="container">
@@ -363,6 +357,9 @@
                         <div class="footer-reserved">
                             <ul>
                                 <li>Copyright © {{ Carbon\Carbon::now()->format('Y') }} {{ App\Models\Setting::where('setting_name', 'copyright')->first()->setting_value }} All rights reserved.</li>
+                            </ul>
+                            <ul>
+                                <li>We Accepted Here : <a target="_blank" href="https://www.sslcommerz.com/" title="SSLCommerz" alt="SSLCommerz"><img style="height:50px;width:550;" src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png" /></a> </li>
                             </ul>
                         </div>
                     </div>

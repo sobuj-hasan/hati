@@ -15,5 +15,4 @@ class Cart extends Model
         return $this->hasone(Product::class, 'id', 'product_id');
     }
 
-
 }

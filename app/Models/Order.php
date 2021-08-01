@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    
+    protected $guarded = [];
+    function rlsnwithproduct(){
+        return $this->hasone(Product::class, 'id', 'product_id');
+    }
 }

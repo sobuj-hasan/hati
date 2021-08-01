@@ -37,6 +37,12 @@
             <span class="menu-item-label">Dashboard</span>
           </div>
         </a>
+        <a href="{{ route('userlist') }}" class="sl-menu-link @yield('userlist')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
+            <span class="menu-item-label">User List</span>
+          </div>
+        </a>
         <a href="" class="sl-menu-link @yield('')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline text-primary tx-22"></i>
@@ -184,7 +190,7 @@
           @yield('content')
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        @yield('footer_scripts')
+        {{-- @yield('footer_scripts') --}}
 
       </div><!-- sl-pagebody -->
     </div><!-- sl-mainpanel -->
@@ -196,9 +202,13 @@
     <script src="{{ asset('starlight_assets/lib/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('starlight_assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
     <script src="{{ asset('starlight_assets/js/starlight.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- Toastr script CDN -->
     <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Notify::message() !!}
+
+    @yield('footer_scripts')
 
   </body>
 </html>

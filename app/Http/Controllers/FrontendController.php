@@ -1,7 +1,7 @@
 <?php
     namespace App\Http\Controllers;
     use Illuminate\Http\Request;
-    use App\Models\Category, App\Models\Product, App\Models\Order, App\Models\Order_details;
+    use App\Models\Category, App\Models\Product, App\Models\Cartorder, App\Models\Order_details;
     use App\Models\Cart;
     use App\Models\Coupon;
     use App\Models\Setting;
@@ -122,18 +122,19 @@
                 if(Hash::check($request->password, $db_password)){
                     // All checking Good
                     if(Auth::attempt($request->except('_token'))){
-                        return redirect()->intended('home');
+                        return redirect()->intended('/');
                     }
                 }
                 else{
+                    Notify::error('Email or Password wrong !', 'error');
                     return back()->with('customer_login_error', "Your Email or Password is Worng!");
                 }
             }
             else{
+                Notify::error("Email don't matched our records", 'error');
                 return back()->with('customer_login_error', "This Email Don't match our records!");
             }
         }
-
         function getcitylist(Request $request){
             $string_send = "";
             foreach (City::where('country_id', $request->country_id)->select('id', 'name')->get() as $city) {
@@ -143,9 +144,19 @@
         }
         function checkoutpost(Request $request){
             if($request->payment_option == 1){
-                echo "Online Payment";
+                return redirect('online/payment');
             }else{
-                $order_id = Order::insertGetId($request->except('_token') + [
+                $request->validate([
+                    'customer_name' => 'required',
+                    'customer_email' => 'required',
+                    'customer_phone' => 'required',
+                    'customer_country' => 'required',
+                    'customer_city' => 'required',
+                    'customer_address' => 'required',
+                    'customer_postcode' => 'required',
+                    'customer_message' => 'required',
+                ]);
+                $order_id = Cartorder::insertGetId($request->except('_token') + [
                     'user_id' => auth::id(),
                     'discount' => session('session_coupon_discount'),
                     'subtotal' => session('session_subtotal'),

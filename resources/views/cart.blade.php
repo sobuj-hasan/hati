@@ -42,11 +42,6 @@
                                 $flag = false;
                                 $total = 0;
                             @endphp
-                            @if (session('cart_update_status'))
-                                <div class="alert alert-success">
-                                    {{ session('cart_update_status') }}
-                                </div>
-                            @endif
                             @if (session('stock_available_status'))
                                 <div class="alert alert-danger">
                                     {{ session('stock_available_status') }}

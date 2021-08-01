@@ -24,7 +24,7 @@
         @if (Auth::user()->role == 2)
             <div class="checkout-area ptb-100">
                 <div class="container">
-                    <form action="{{ route('checkoutpost') }}" method="POST">
+                    <form id="main-form" action="{{ route('checkoutpost') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-lg-8">
@@ -38,41 +38,65 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <p>Name *</p>
-                                            <input type="text" value="{{ auth::user()->name }}" name="customer_name">
+                                            <input type="text" value="{{ auth::user()->name }}" name="customer_name" required>
+                                            @error('customer_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <p>Email Address *</p>
-                                            <input type="email" value="{{ auth::user()->email }}" name="customer_email">
+                                            <input type="email" value="{{ auth::user()->email }}" name="customer_email" required>
+                                            @error('customer_email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <p>Phone No. *</p>
-                                            <input type="text" value="{{ auth::user()->phone }}" name="customer_phone">
+                                            <input type="text" value="{{ auth::user()->phone }}" name="customer_phone" required>
+                                            @error('customer_phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <p>Country *</p>
-                                            <select id="country_list" name="customer_country">
+                                            <select id="country_list" name="customer_country" required>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('customer_country')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <p>City *</p>
-                                            <select id="city_list" name="customer_city">
+                                            <select id="city_list" name="customer_city" required>
                                                 <option value="">Select City</option>
                                             </select>
+                                            @error('customer_city')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>                                
                                         <div style="padding-top: 25px;" class="col-6">
                                             <p>Your Address *</p>
-                                            <input type="text" name="customer_address">
+                                            <input type="text" name="customer_address" required>
+                                            @error('customer_address')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div style="padding-top: 25px;" class="col-sm-6 col-12">
                                             <p>Postcode/ZIP</p>
                                             <input type="text" name="customer_postcode">
+                                            @error('customer_postcode')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>                  
                                         <div class="col-12">
                                             <p>Order Notes </p>
                                             <textarea name="customer_message" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                            @error('customer_message')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +112,7 @@
                                     </ul>
                                     <ul class="payment-method">                      
                                         <li>
-                                            <input id="card" type="radio" name="payment_option" value="1">
+                                            <input checked id="card" type="radio" name="payment_option" value="1">
                                             <label for="card">Credit Card</label>
                                         </li>
                                         <li>
@@ -96,7 +120,7 @@
                                             <label for="delivery">Cash on Delivery</label>
                                         </li>
                                     </ul>
-                                    <button class="" type="submit">Place Order</button>
+                                    <button id="place_order_btn" type="button">Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +186,15 @@
                     $('#city_list').html(data);
                 }
             });
-
+        });
+        $('#place_order_btn').click(function(){
+            if($("input[name='payment_option']:checked").val() == 1){
+                $('#main-form').attr('action', 'http://127.0.0.1:8000/pay');
+            }
+            else{
+                $('#main-form').attr('action', 'http://127.0.0.1:8000/checkout/post');
+            }
+            $( "#main-form" ).submit();
         });
     });
 </script>
