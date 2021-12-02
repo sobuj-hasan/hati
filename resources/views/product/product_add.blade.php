@@ -1,5 +1,4 @@
 @extends('layouts.starlight')
-
 @section('title')
     Add new product
 @endsection

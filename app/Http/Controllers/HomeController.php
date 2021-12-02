@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\user, App\Models\CartOrder, App\Models\Order_details;
 use Auth;
 use PDF;
+use Notify;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -17,16 +18,7 @@ class HomeController extends Controller
         $users = user::latest()->get();
         $orders = Cartorder::where('user_id',Auth::id())->latest()->get();
 
-            // last week users infomation
-            // $january = date('Y-m-d', strtotime('saturday last week'));
-            // $last_friday = date('Y-m-d', strtotime('friday this week'));
-            // $last_week_query = "SELECT * FROM users WHERE `user_join_date` between '$last_saturday' and '$last_friday'";
-            // $last_week_info = mysqli_query($np2con, $last_week_query);
-            // last monthy users infomation 
-            // $last_month = date('Y-m-d', strtotime('last month'));
-            // $this_month = date('Y-m-d', strtotime('this month'));
-            // $last_month_query = "SELECT * FROM users WHERE `user_join_date` between '$last_month' and '$this_month'";
-            // $last_month_info = mysqli_query($np2con, $last_month_query);
+        $credit_cart = Cartorder::where('payment_option', 1)->count();
 
         return view('home', compact('users', 'orders'));
     }
@@ -42,5 +34,28 @@ class HomeController extends Controller
         $invoice_name = "invoice".Carbon::now()."-".$order_id.".pdf";
         return $pdf->stream($invoice_name);
     }
-    
+    public function sendsms(Request $request){
+        $customer_info = Cartorder::select('customer_name', 'customer_phone')->get();
+        foreach ($customer_info as $single_info) {
+            $url = "http://66.45.237.70/api.php";
+            $number="$request->numbers";
+            $text="Hi Dear $single_info->customer_name, $request->message";
+            $data= array(
+            'username'=>"01834833973", // Sohan sir er account
+            'password'=>"TE47RSDM",  // Sohan sir er account
+            'number'=>"$number",
+            'message'=>"$text"
+            );
+
+            $ch = curl_init(); // Initialize cURL
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $smsresult = curl_exec($ch);
+            $p = explode("|",$smsresult);
+            $sendstatus = $p[0];
+        }
+        Notify::success('Your msg submitted your customer!', 'Success');
+        return back();
+    }
 }

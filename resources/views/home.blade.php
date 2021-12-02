@@ -105,7 +105,7 @@
                 </div><!-- row -->
 
                 <div class="row">
-                    <div class="col-md-8 m-auto">
+                    <div class="col-md-12 m-auto">
                         <div>
                             <canvas id="myChart"></canvas>
                         </div>
@@ -177,7 +177,7 @@
                 label: 'Sell',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [12, 10, 5, 2, 20, 30, 45, 67, 43, 21, 80],
+                data: [12, 10, 5, 2, 20, 30, 45, 67, 43, 21, 80, 85],
             }]
         };
 
@@ -186,7 +186,6 @@
             data,
             options: {}
         };
-
         var myChart = new Chart(
             document.getElementById('myChart'),
             config

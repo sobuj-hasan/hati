@@ -66,7 +66,12 @@
                                 <li>(05 Customar Review)</li>
                             </ul>
                         </div>
-                        <p>{{ $product_info->product_short_description }}</p>
+                        <p>
+                            <?php 
+                                $product_descript = htmlspecialchars_decode($product_info->product_short_description);
+                                echo $product_descript;
+                            ?>
+                        </p>
                         <form action="{{ route('addtocart', $product_info->id) }}" method="POST">
                             @csrf
                             <ul class="input-style">
@@ -89,11 +94,11 @@
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="http://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}&t=MINIshop.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="http://www.twitter.com/intent/tweet?url={{ url()->full() }}&via=TWITTER_HANDLE_HERE&text=MINIshop.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            {{-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -112,7 +117,9 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="description">
                             <div class="description-wrap">
-                                <p>{{ $product_info->product_long_description }} </p>
+                                <p>
+                                    {!! $product_info->product_short_description !!}
+                                </p>
                             </div>
                         </div>
                         <div class="tab-pane" id="tag">

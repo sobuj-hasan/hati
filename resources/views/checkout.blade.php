@@ -154,8 +154,8 @@
                     <div class="alert alert-danger">
                         <h6 class="mt-2">Website: <span style="margin-left: 150px;">Mini Shop / minishop.com.bd</span></h6>
                         <h6>Status: <span style="margin-left: 160px;">You are Not Loged in!!</span></h6>
-                        <h6>Have a account: <span><a style="margin-left: 84px;" class="btn btn-outline-info" href="{{ url('login') }}">Login Here</a></span></h6>
-                        <h6>New Account: <span><a style="margin-left: 105px;" class="btn btn-outline-info" href="{{ url('register') }}">Register Here</a></span></h6>
+                        <h6>Have a account: <span><a style="margin-left: 84px;" class="btn btn-outline-info" href="{{ url('customer/login') }}">Login Here</a></span></h6>
+                        <h6>New Account: <span><a style="margin-left: 105px;" class="btn btn-outline-info" href="{{ url('customer/register') }}">Register Here</a></span></h6>
                     </div>
                 </div>
             </div>

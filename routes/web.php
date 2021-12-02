@@ -38,6 +38,8 @@
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('home/userlist', [HomeController::class, 'userlist'])->name('userlist');
     Route::get('download/invoice/{order_id}', [HomeController::class, 'downloadinvoice'])->name('downloadinvoice');
+    Route::post('send/sms', [HomeController::class, 'sendsms'])->name('sendsms');
+    
 
     // generet laravel CatrgoryController Routes
     Route::get('category', [CategoryController::class, 'category'])->name('category');

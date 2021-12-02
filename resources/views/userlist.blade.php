@@ -31,6 +31,27 @@
                     </div>
                 </div>
 
+                <div class="col-md-12 col-sm-12">
+                    <form action="{{ url('send/sms') }}" method="POST">
+                        @csrf
+                        <div class="card-header">
+                            <h6>Send SMS Your Customer</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-control">
+                                <label class="h6 mt-2" for="">Select Number</label>
+                                <input name="numbers" class="form-control" type="text" value="">
+                            </div>
+    
+                            <div class="form-control">
+                                <label class="h6 mt-2" for="">Type Message</label>
+                                <textarea name="message" rows="5" class="form-control"></textarea>
+                            </div>
+                            <button class="mt-2 btn btn-info">Send Msg</button>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
 

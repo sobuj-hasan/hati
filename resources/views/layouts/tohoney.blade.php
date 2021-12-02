@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MINI-shop - Home</title>
-
     <!-- all css here -->
     <!-- bootstrap v4.0.0-beta.2 css -->
     <link rel="stylesheet" href="{{ asset('tohoney_assets/css/bootstrap.min.css') }}">
@@ -117,36 +116,24 @@
                         <nav class="mainmenu">
                             <ul class="d-flex">
                                 <li class="active"><a href="{{ route('tohoney_home') }}">Home</a></li>
-                                <li><a href="{{ route('about') }}">About</a></li>
                                 <li>
                                     <a href="{{ route('shop') }}"> Shop </i></a>
-                                    {{-- <ul class="dropdown_style">
-                                        <li><a href="shop.html">Shop Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                    </ul> --}}
                                 </li>
+                                <li>
+                                    <a href="{{ route('shop') }}"> New arrivals </i></a>
+                                </li>
+                                <li><a href="{{ route('about') }}">About</a></li>
                                 <li>
                                     <a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
-                                        <li><a href="about.html">About Page</a></li>
-                                        <li><a href="single-product.html">Product Details</a></li>
-                                        <li><a href="cart.html">Shopping cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Privacy Policy</a></li>
+                                        <li><a href="#">Terms & Condition</a></li>
+                                        <li><a href="#">FAQ</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown_style">
-                                        <li><a href="blog.html">blog Page</a></li>
-                                        <li><a href="blog-details.html">blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ route('contact') }}">Contact</a></li>
+                                <li><a href="#">Our Blog </a></li>
+                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -274,6 +261,8 @@
     <!-- header-area end -->
     
     @yield('body')
+	
+	
 <!-- start social-newsletter-section -->
     <section class="social-newsletter-section">
         <div class="container">
@@ -303,11 +292,11 @@
                         <div class="col-lg-12 col-12">
                             <div class="footer-top-text text-center">
                                 <ul>
-                                    <li><a href="home.html">home</a></li>
-                                    <li><a href="#">our story</a></li>
-                                    <li><a href="#">feed shop</a></li>
-                                    <li><a href="blog.html">how to eat blog</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li><a href="{{ route('tohoney_home') }}">Home</a></li>
+                                    <li><a href="{{ route('about') }}">About Us</a></li>
+                                    <li><a href="{{ route('shop') }}">View Shop</a></li>
+                                    <li><a href="#">Our Blogs</a></li>
+                                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -359,7 +348,7 @@
                                 <li>Copyright © {{ Carbon\Carbon::now()->format('Y') }} {{ App\Models\Setting::where('setting_name', 'copyright')->first()->setting_value }} All rights reserved.</li>
                             </ul>
                             <ul>
-                                <li>We Accepted Here : <a target="_blank" href="https://www.sslcommerz.com/" title="SSLCommerz" alt="SSLCommerz"><img style="height:50px;width:550;" src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png" /></a> </li>
+                                <li>We Accepted Here : <a target="_blank" href="https://www.sslcommerz.com/" title="SSLCommerz" alt="SSLCommerz"><img style="height:20px;width:900;" src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-03.png" /></a> </li>
                             </ul>
                         </div>
                     </div>
@@ -368,58 +357,7 @@
         </div>
     </div>
     <!-- .footer-area end -->
-    <!-- Modal area start -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-body d-flex">
-                    <div class="product-single-img w-50">
-                        <img src="{{ asset('tohoney_assets') }}/images/product/product-details.jpg" alt="">
-                    </div>
-                    <div class="product-single-content w-50">
-                        <h3>Pure Nature Hohey</h3>
-                        <div class="rating-wrap fix">
-                            <span class="pull-left">$219.56</span>
-                            <ul class="rating pull-right">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
-                            </ul>
-                        </div>
-                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire denounce with righteous indignation</p>
-                        <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
-                        </ul>
-                        <ul class="cetagory">
-                            <li>Categories:</li>
-                            <li><a href="#">Honey,</a></li>
-                            <li><a href="#">Olive Oil</a></li>
-                        </ul>
-                        <ul class="socil-icon">
-                            <li>Share :</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal area start -->
 
-    
     <!-- jquery latest version -->
     <script src="{{ asset('tohoney_assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     <!-- bootstrap js -->
@@ -455,8 +393,6 @@
     @yield('footer_scripts')
 
 </body>
-
-
 <!-- Mirrored from themepresss.com/tf/html/tohoney/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Mar 2020 03:33:34 GMT -->
 </html>
 
